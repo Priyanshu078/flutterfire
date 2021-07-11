@@ -1,6 +1,14 @@
 # flutterfire
 
-A new Flutter application.
+This is a application for implementing GoogleID or GmailId signIn using firebase in flutter.
+
+#First screen
+![GoogleIdsignin1](https://user-images.githubusercontent.com/66347715/125184171-25325180-e239-11eb-93c8-6edb183055c6.jpg)
+
+#Screen after signingIn with GoogleID and having some data from the GoogleID
+![GoogleIdsignin2](https://user-images.githubusercontent.com/66347715/125184180-3a0ee500-e239-11eb-8d27-b79b6cc48e4b.jpg)
+
+
 
 ## Getting Started
 
