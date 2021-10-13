@@ -5,7 +5,7 @@ import 'package:flutterfire/utils/authentication.dart';
 import 'SignInScreen.dart';
 
 class UserInfoScreen extends StatefulWidget {
-  const UserInfoScreen({Key? key, required User user})
+  const UserInfoScreen({Key key, @required User user})
       : _user = user,
         super(key: key);
 
@@ -15,7 +15,7 @@ class UserInfoScreen extends StatefulWidget {
 }
 
 class _UserInfoScreenState extends State<UserInfoScreen> {
-  late User _user;
+  User _user;
   bool _isSigningOut = false;
 
   Route _routeToSignInScreen() {
@@ -27,7 +27,7 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
         var curve = Curves.ease;
 
         var tween =
-        Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+            Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
 
         return SlideTransition(
           position: animation.drive(tween),
@@ -36,8 +36,9 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
       },
     );
   }
+
   @override
-  void initState(){
+  void initState() {
     _user = widget._user;
     super.initState();
   }
@@ -53,41 +54,46 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
         padding: EdgeInsets.all(16),
         child: Column(
           children: <Widget>[
-            SizedBox(height: 30,),
+            SizedBox(
+              height: 30,
+            ),
             _user.photoURL != null
-            ? ClipOval(
-            child: Material(
-                color: Colors.blueAccent.withOpacity(0.3),
-                child: Image.network(
-                _user.photoURL!,
-                fit: BoxFit.fitHeight,
-            ),
-            ),
-            )
+                ? ClipOval(
+                    child: Material(
+                      color: Colors.blueAccent.withOpacity(0.3),
+                      child: Image.network(
+                        _user.photoURL,
+                        fit: BoxFit.fitHeight,
+                      ),
+                    ),
+                  )
                 : ClipOval(
-                        child: Material(
-                          color: Colors.blueAccent.withOpacity(0.3),
-                          child: Padding(
-                            padding: EdgeInsets.all(16),
-                            child: Icon(Icons.person,
-                            size: 60,
-                              color: Colors.blueAccent,
-                            ),
-                          ),
+                    child: Material(
+                      color: Colors.blueAccent.withOpacity(0.3),
+                      child: Padding(
+                        padding: EdgeInsets.all(16),
+                        child: Icon(
+                          Icons.person,
+                          size: 60,
+                          color: Colors.blueAccent,
                         ),
                       ),
+                    ),
+                  ),
             Padding(
-              padding: EdgeInsets.fromLTRB(0, 8, 0, 8),
-                child: Text("Welcome",
+                padding: EdgeInsets.fromLTRB(0, 8, 0, 8),
+                child: Text(
+                  "Welcome",
                   style: TextStyle(
                     fontWeight: FontWeight.w400,
                     fontSize: 25,
                     color: Colors.amberAccent,
-                  ),)),
+                  ),
+                )),
             Padding(
-              padding: EdgeInsets.fromLTRB(0,8, 0, 8),
+              padding: EdgeInsets.fromLTRB(0, 8, 0, 8),
               child: Text(
-                _user.displayName!,
+                _user.displayName,
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 25,
@@ -96,9 +102,9 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
               ),
             ),
             Padding(
-              padding: EdgeInsets.fromLTRB(0, 8, 0, 8),
+                padding: EdgeInsets.fromLTRB(0, 8, 0, 8),
                 child: Text(
-                    '${_user.email!}',
+                  '${_user.email}',
                   style: TextStyle(
                     color: Colors.orange,
                     fontSize: 25,
@@ -106,7 +112,7 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
                   ),
                 )),
             Padding(
-              padding: EdgeInsets.fromLTRB(0, 8, 0, 16),
+                padding: EdgeInsets.fromLTRB(0, 8, 0, 16),
                 child: Text(
                   'You are now signedIn with Google. \n To logout, Press the "Logout" button',
                   style: TextStyle(
@@ -114,17 +120,19 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
                     color: Colors.white,
                   ),
                 )),
-            if (_isSigningOut) CircularProgressIndicator(
-              valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-            ) else ElevatedButton(
-              style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all(Colors.redAccent),
-                shape: MaterialStateProperty.all(
-                  RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10)
-                  ), 
+            if (_isSigningOut)
+              CircularProgressIndicator(
+                valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+              )
+            else
+              ElevatedButton(
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all(Colors.redAccent),
+                  shape: MaterialStateProperty.all(
+                    RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10)),
+                  ),
                 ),
-              ),
                 onPressed: () async {
                   setState(() {
                     _isSigningOut = true;
@@ -137,12 +145,16 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
                 },
                 child: Padding(
                   padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
-                  child: Text("Logout",style: TextStyle(
-                    fontSize: 20,
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                  ),),
-                ),),
+                  child: Text(
+                    "Logout",
+                    style: TextStyle(
+                      fontSize: 20,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              ),
           ],
         ),
       ),
